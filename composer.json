@@ -1,7 +1,10 @@
 {
     "name": "ysun/onemanager",
     "description": "A list index & manager of Onedrive. Can be deploy to heroku/SCF/normal space.",
-    
+    "require": {
+    "php": "^7.0.0",
+    "doctrine/cache": "1.*"
+  },
         "authors": [
         {
             "name": "ysun",
