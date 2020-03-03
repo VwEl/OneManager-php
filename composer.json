@@ -1,4 +1,4 @@
 {
-    "name": "OneManager",
+    "name": "ysun/OneManager",
     "description": "A list index & manager of Onedrive. Can be deploy to heroku/SCF/normal space."
 }
