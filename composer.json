@@ -2,12 +2,8 @@
     "name": "OneManager",
     "description": "A list index & manager of Onedrive. Can be deploy to heroku/SCF/normal space.",
     "type": "project",
-    "authors": [
-        {
-            "name": "ysun",
-            "email": "",
-            "homepage": "",
-            "role": "Developer"
-        }
-    ],
+    "require": {
+    "php": "^7.0.0",
+    },
+
 }
