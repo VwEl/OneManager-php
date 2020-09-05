@@ -1,19 +1,22 @@
 <?php
 
+global $exts;
+global $constStr;
+
 $exts['img'] = ['ico', 'bmp', 'gif', 'jpg', 'jpeg', 'jpe', 'jfif', 'tif', 'tiff', 'png', 'heic', 'webp'];
-$exts['music'] = ['mp3', 'wma', 'flac', 'wav', 'ogg'];
+$exts['music'] = ['mp3', 'wma', 'flac', 'ape', 'wav', 'ogg', 'm4a'];
 $exts['office'] = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
-$exts['txt'] = ['txt', 'bat', 'sh', 'php', 'asp', 'js', 'json', 'html', 'c', 'md'];
-$exts['video'] = ['mp4', 'webm', 'mkv', 'mov', 'flv', 'blv', 'avi', 'wmv', 'm3u8'];
+$exts['txt'] = ['txt', 'bat', 'sh', 'php', 'asp', 'js', 'css', 'json', 'html', 'c', 'cpp', 'md', 'py', 'omf'];
+$exts['video'] = ['mp4', 'webm', 'mkv', 'mov', 'flv', 'blv', 'avi', 'wmv', 'm3u8', 'rm', 'rmvb'];
 $exts['zip'] = ['zip', 'rar', '7z', 'gz', 'tar'];
 
 $constStr = [
     'languages' => [
         'en-us' => 'English',
-        'zh-cn' => '中文',
+        'zh-cn' => '简体中文',
         'ja' => '日本語',
         'ko-kr' => '한국어',
-        'fa' => 'Persian',
+        'fa' => 'فارسی',
     ],
     'Week' => [
         'en-us' => [
@@ -66,12 +69,24 @@ $constStr = [
         'en-us' => [
             'admin' => 'The admin password, Login button will not show when empty',
             'adminloginpage' => 'if set, the Login button will not display, and the login page no longer \'?admin\', it is \'?{this value}\'.',
+            'autoJumpFirstDisk' => 'used in multy disks, if 1, auto jump to first disk',
+            'customScript' => '<script> in all pages, e.g. http turn to https',
+            'customCss' => '<style> in <head>',
+            'customTheme' => 'an url of html',
             'domain_path' => 'more custom domain, format is a1.com:/dirto/path1|b2.com:/path2',
             'diskname' => 'The disk name you want show.',
             'disktag' => 'A tag used in store config and url.',
-            'background' => 'Set an url as background photo, or put a \'background.jpg\' at showed path.',
+            'disableShowThumb' => 'if 1, the ShowThumbnail button will not display',
+            'disableChangeTheme' => 'if 1, the Theme selection button will not display',
+            'downloadencrypt' => '0 or 1. if 1, the files in encrypt folder can be downloaded without password',
+            'background' => 'Set an url as background photo.',
+            'backgroundm' => 'Set an url as background in mobile phone.',
+            'theme' => 'Select theme.',
+            'timezone' => 'Set default timezone.',
             'guestup_path' => 'Set guest upload dir, before set this, the files in this dir will show as normal.',
-            'passfile' => 'The password of dir will save in this file.',
+            'hideFunctionalityFile' => '0 or 1. if 1, some file will not show in list to guest, like readme.md',
+            'passfile' => 'The password of folder(& its childrens) will save in this file.',
+            'domainforproxy' => 'Will replace the https://xxxxx-my.sharepoint.com with this value.Add &Origindomain=xxxxx-my.sharepoint.com at last',
             'public_path' => 'Show this Onedrive dir when through the long url of API Gateway; public show files less than private.',
             'sitename' => 'sitename',
             'Onedrive_ver' => 'Onedrive version',
@@ -79,12 +94,24 @@ $constStr = [
         'zh-cn' => [
             'admin' => '管理密码，不添加时不显示登录页面且无法登录。',
             'adminloginpage' => '如果设置，登录按钮及页面隐藏。管理登录的页面不再是\'?admin\'，而是\'?此设置的值\'。',
+            'autoJumpFirstDisk' => '用于多盘，如果设1，将会自动跳到第一个盘。',
+            'customScript' => '<script>，在所有页都会存在,例如放一个http跳转https',
+            'customCss' => '<style>，在<head>最后面',
+            'customTheme' => 'html格式的主题的url',
             'domain_path' => '使用多个自定义域名时，指定每个域名看到的目录。格式为a1.com:/dirto/path1|b1.com:/path2，比private_path优先。',
             'diskname' => '这个盘你想显示什么名称。',
             'disktag' => '一个标签，用于保存配置，多盘时会显示在url中。',
-            'background' => '设置一个url作为背景，或者在你显示的目录放一个background.jpg文件。',
+            'disableShowThumb' => '如果填 1, ‘显示缩略’按钮将被隐藏。',
+            'disableChangeTheme' => '如果填 1, 主题选择切换将被隐藏',
+            'downloadencrypt' => '0 或 1。如果 1, 那加密目录内的文件可以不需要密码就能下载。',
+            'background' => '设置一个url作为背景。',
+            'backgroundm' => '设置一个url作为手机用的背景。',
+            'theme' => '选择一个主题。',
+            'timezone' => '设置默认时区。',
             'guestup_path' => '设置游客上传路径（图床路径），不设置这个值时该目录内容会正常列文件出来，设置后只有上传界面，不显示其中文件（登录后显示）。',
+            'hideFunctionalityFile' => '0 或 1。如果 1, 某些文件不列表给游客看，但它的功能正常，比如readme.md',
             'passfile' => '自定义密码文件的名字，可以是\'pppppp\'，也可以是\'aaaa.txt\'等等；列目录时不会显示，只有知道密码才能查看或下载此文件。密码是这个文件的内容，可以空格、可以中文；',
+            'domainforproxy' => '会将https://xxxxx-my.sharepoint.com替换成这个值，在目标需要自己设置反代。会加上&Origindomain=原域名',
             'public_path' => '使用API长链接访问时，显示网盘文件的路径，不设置时默认为根目录；不能是private_path的上级（public看到的不能比private多，要么看到的就不一样）。',
             'sitename' => '网站的名称',
             'Onedrive_ver' => 'Onedrive版本',
@@ -95,6 +122,7 @@ $constStr = [
             'domain_path' => '複数のカスタムドメイン名を使用する場合、各ドメイン名に表示されるディレクトリを指定します。形式はa1.com:/dirto/path1|b1.com:/path2で、private_pathよりも優先されます。',
             'diskname' => '',
             'disktag' => '',
+            'downloadencrypt' => '',
             'background' => '',
             'guestup_path' => 'マップベッドのパスを設定します。この値が設定されていない場合、ディレクトリの内容は通常ファイルにリストされ、設定後はアップロードインターフェイスのみが表示されます。',
             'passfile' => 'カスタムパスワードファイルの名前は、\'pppppp \'、\'aaaa.txt \'などの場合があります。ディレクトリをリストするときには表示されません。パスワードを知っている場合にのみ、このファイルを表示またはダウンロードできます。 パスワードはこのファイルの内容であり、スペースまたは漢字を使用できます。',
@@ -108,7 +136,8 @@ $constStr = [
             'domain_path' => '여러 개의 사용자 정의 도메인 이름을 사용하는 경우 각 도메인 이름에 표시되는 디렉토리를 지정하십시오. 형식은 a1.com:/dirto/path1|b1.com:/path2이며 private_path보다 우선합니다.',
             'diskname' => '이 디스크에 어떤 이름을 표시 하시겠습니까?',
             'disktag' => '레이블은 구성을 저장하는 데 사용되며 디스크가 여러 개인 경우 URL에 표시됩니다.',
-            'background' => 'URL을 배경으로 설정하거나 표시하는 디렉토리에 background.jpg 파일을 넣으십시오.',
+            'downloadencrypt' => '',
+            'background' => 'URL을 배경으로 설정하거나 표시하는.',
             'guestup_path' => '방문자의 업로드 경로 (맵 베드 경로)를 설정합니다.이 값을 설정하지 않으면 디렉토리의 내용이 파일로 표시되고 설정 후에는 업로드 인터페이스 만 표시되고 파일은 표시되지 않습니다 (로그인 후 표시).',
             'passfile' => '사용자 정의 비밀번호 파일의 이름은 \'pppppp\' \'aaaa.txt \'등이 될 수 있으며 디렉토리가 나열되어 있으면 표시되지 않으며 비밀번호를 알고있는 경우에만이 파일을 보거나 다운로드 할 수 있습니다. 암호는이 파일의 내용이며 공백이거나 한국어 일 수 있습니다.',
             'public_path' => 'API 긴 링크 액세스를 사용하는 경우 네트워크 디스크 파일의 경로가 표시됩니다. 설정되지 않은 경우 기본적으로 루트 디렉토리로 설정됩니다.',
@@ -121,6 +150,7 @@ $constStr = [
             'domain_path' => 'تنظیم دامنه سفارشی، به صورت a1.com:/dirto/path1|b2.com:/path2',
             'diskname' => 'نام دیسک که می‌خواهید نشان دهید.',
             'disktag' => 'تگی که در ذخیره پیکربندی و نشانی اینترنتی استفاده می‌شود.',
+            'downloadencrypt' => '',
             'background' => 'تنظیم عکس پشت زمینه به صورت url یا قرار دادن بک گراند به صورت دستی در مسیر نشان داده شده.',
             'guestup_path' => 'قبل از تنظیم این گزینه ، فایل آپلود guest را تنظیم کنید ، پرونده های موجود در این حالت به صورت عادی نشان داده می شوند.',
             'passfile' => 'رمز عبور dir در این فایل ذخیره می شود.',
@@ -171,7 +201,7 @@ $constStr = [
         'ko-kr' => '로그인',
         'fa' => 'ورود',
     ],
-    'encrypt' => [
+    'Encrypt' => [
         'en-us' => 'Encrypt',
         'zh-cn' => '加密',
         'ja' => '暗号化',
@@ -183,7 +213,7 @@ $constStr = [
         'zh-cn' => '先在环境变量设置passfile才能加密',
         'ja' => '最初に暗号化する環境変数にパスファイルを設定します',
         'ko-kr' => '암호화하기 전에 환경 변수에 패스 파일을 설정하십시오',
-        'fa' => 'قبل از رمزگذاری \ "pass file \" را در محیط تنظیم کنید',
+        'fa' => 'قبل از رمزگذاری \"pass file \" را در محیط تنظیم کنید',
     ],
     'updateProgram' => [
         'en-us' => 'Update Program',
@@ -212,6 +242,10 @@ $constStr = [
         'ja' => 'back',
         'ko-kr' => '돌아 가기',
         'fa' => 'بازگشت',
+    ],
+    'Theme' => [
+        'en-us' => 'Theme',
+        'zh-cn' => '主题',
     ],
     'NotNeedUpdate' => [
         'en-us' => 'Not Need Update',
@@ -247,6 +281,14 @@ $constStr = [
         'ja' => 'ホーム',
         'ko-kr' => '홈',
         'fa' => 'خانه',
+    ],
+    'Preview' => [
+        'en-us' => 'Preview',
+        'zh-cn' => '预览',
+    ],
+    'List' => [
+        'en-us' => 'List',
+        'zh-cn' => '列表',
     ],
     'NeedUpdate' => [
         'en-us' => 'Program can update<br>Click setup in Operate at top.',
@@ -318,12 +360,20 @@ $constStr = [
         'ko-kr' => '사진 섬네일',
         'fa' => 'تصویر بندانگشتی',
     ],
+    'OriginalPic' => [
+        'en-us' => 'OriginalPic',
+        'zh-cn' => '原图',
+    ],
     'CopyAllDownloadUrl' => [
         'en-us' => 'CopyAllDownloadUrl',
         'zh-cn' => '复制所有下载链接',
         'ja' => 'すべてのダウンロードリンクをコピー',
         'ko-kr' => '모든 다운로드 링크 복사',
         'fa' => 'کپی از تمام لینک ها',
+    ],
+    'Search' => [
+        'en-us' => 'Search',
+        'zh-cn' => '搜索',
     ],
     'EditTime' => [
         'en-us' => 'EditTime',
@@ -394,6 +444,14 @@ $constStr = [
         'ja' => 'アップロードする',
         'ko-kr' => '업로드',
         'fa' => 'آپلود',
+    ],
+    'UploadFile' => [
+        'en-us' => 'Upload File(s)',
+        'zh-cn' => '上传文件',
+    ],
+    'UploadFolder' => [
+        'en-us' => 'Upload Folder',
+        'zh-cn' => '上传文件夹',
     ],
     'FileSelected' => [
         'en-us' => 'Select File',
@@ -478,6 +536,10 @@ $constStr = [
         'ja' => 'アップロードリンクを取得',
         'ko-kr' => '업로드 링크 받기',
         'fa' => 'دریافت لینک آپلود',
+    ],
+    'Calculate' => [
+        'en-us' => 'Calculate',
+        'zh-cn' => '计算',
     ],
     'UpFileTooLarge' => [
         'en-us' => 'The File is too Large!',
@@ -565,10 +627,6 @@ $constStr = [
     ],
     'defaultSitename' => [
         'en-us' => 'OneManager',
-        'zh-cn' => 'OneManager',
-        'ja' => 'OneManager',
-        'ko-kr' => 'OneManager',
-        'fa' => 'OneManager',
     ],
     'SavingToken' => [
         'en-us' => 'Saving refresh_token!',
@@ -578,11 +636,11 @@ $constStr = [
         'fa' => 'در حال ذخیره refresh_token!',
     ],
     'MayinEnv' => [
-        'en-us' => 'The \'Onedrive_ver\' may in Config',
-        'zh-cn' => 'Onedrive_ver应该已经写入',
-        'ja' => 'Onedrive_verは環境変数に書き込まれている必要があります',
-        'ko-kr' => 'Onedrive_verが書き込まれている必要があります',
-        'fa' => 'The \'Onedrive_ver\' may in Config',
+        'en-us' => 'The \'Drive_ver\' may in Config',
+        'zh-cn' => 'Drive_ver应该已经写入',
+        'ja' => 'Drive_verは環境変数に書き込まれている必要があります',
+        'ko-kr' => 'Drive_verが書き込まれている必要があります',
+        'fa' => 'The \'Drive_ver\' may in Config',
     ],
     'Wait' => [
         'en-us' => 'Wait',
@@ -619,69 +677,96 @@ $constStr = [
         'ko-kr' => 'Onedrive 표시 이름',
         'fa' => 'نام نشان داده شده Onedrive',
     ],
-    'OndriveVerMS' => [
-        'en-us' => 'default(Onedrive, Onedrive for business)',
-        'zh-cn' => '默认（支持商业版与个人版）',
-        'ja' => 'デフォルト（商用版および個人版をサポート）',
-        'ko-kr' => '기본 (상업용 및 개인용 버전 지원)',
-        'fa' => 'پیش فرض(Onedrive, Onedrive for business)',
+    'DriveVerMS' => [
+        'en-us' => 'Onedrive, Onedrive for business',
+        'zh-cn' => '国际版（商业版与个人版）',
     ],
-    'OndriveVerCN' => [
+    'DriveVerCN' => [
         'en-us' => 'Onedrive in China',
         'zh-cn' => '世纪互联版',
         'ja' => '中国のOnedrive',
         'ko-kr' => '중국 Onedrive',
         'fa' => 'Onedrive در چین',
     ],
-    'OndriveVerMSC' =>[
-        'en-us' => 'default but use customer app id & secret',
-        'zh-cn' => '国际版，自己申请应用ID与机密',
-        'ja' => '国際版、アプリケーションIDとシークレットを自分で申請する',
-        'ko-kr' => '국제 버전, 응용 프로그램 ID 및 비밀 신청',
+    'DriveVerShareurl' => [
+        'en-us' => 'A share link of a folder',
+        'zh-cn' => '共享链接',
+    ],
+    'UseShareLink' => [
+        'en-us' => 'Share a folder in Onedrive (enable EDIT for everyone), input the link url below.',
+        'zh-cn' => '对一个Onedrive文件夹共享，允许所有人编辑，然后将共享链接填在下方',
+    ],
+    'CustomIdSecret' => [
+        'en-us' => 'Use custom client id & secret instead of OneManager default',
+        'zh-cn' => '自己申请应用ID与机密，不用OneManager默认的',
+        'ja' => 'アプリケーションIDとシークレットを自分で申請する',
+        'ko-kr' => '응용 프로그램 ID 및 비밀 신청',
         'fa' => 'به طور پیش فرض اما از شناسه برنامه و سکرت استفاده کنید',
     ],
-    'GetSecretIDandKEY' =>[
-        'en-us' => 'Get customer app id & secret',
+    'GetSecretIDandKEY' => [
+        'en-us' => 'Get custom client id & secret',
         'zh-cn' => '申请应用ID与机密',
         'ja' => 'アプリケーションIDとシークレット',
         'fa' => 'دریافت شناسه برنامه و سکرت',
     ],
-    'TagFormatAlert' =>[
+    'UseSharepointInstead' => [
+        'en-us' => 'Use space in Sharepoint website instead of Onedrive',
+        'zh-cn' => '使用Sharepoint网站的空间，不使用Onedrive',
+    ],
+    'GetSharepointSiteAddress' => [
+        'en-us' => 'Login office.com and click the SharePoint, create a website or find an exist website, input the Site address below',
+        'zh-cn' => '登录office.com，点击Sharepoint，创建一个网站（或使用原有网站），然后将它的站点地址填在下方',
+    ],
+    'InputSharepointSiteAddress' => [
+        'en-us' => 'https://xxxxx.sharepoint.com/sites(teams)/{name}',
+    ],
+    'TagFormatAlert' => [
         'en-us' => 'Tag must start with a letter, end with a letter or digit and can only contain lowercase letters, digits, and dashes， at least 2 letters!',
         'zh-cn' => '标签只能以字母开头，以字母或数字结尾，至少2位',
         'ja' => 'タグは、文字で始まり、文字または数字で終わる必要があります。少なくとも2つ',
         'ko-kr' => '태그는 문자로 시작하고 문자 또는 숫자로 끝나야합니다 (2 이상).',
         'fa' => 'برچسب باید با یک حرف شروع شود، با یک حرف یا رقم پایان یابد و تنها می‌تواند حاوی حروف کوچک، ارقام و خط فاصله، حداقل ۲ حرف باشد!',
     ],
-    'ClickInstall' =>[
+    'ClickInstall' => [
         'en-us' => 'Click to install the project',
         'zh-cn' => '点击开始安装程序',
         'ja' => 'クリックしてインストールプロセスを開始します',
         'ko-kr' => '설치 과정을 시작하려면 클릭',
         'fa' => 'برای نصب پروژه کلیک کنید',
     ],
-    'LogintoBind' =>[
+    'LogintoBind' => [
         'en-us' => 'then login and bind your onedrive in setup',
         'zh-cn' => '然后登录后在设置中绑定你的onedrive。',
         'ja' => '次に、ログインして、設定でonedriveをバインドします。',
         'ko-kr' => '그런 다음 로그인하여 onedrive를 설정에 바인딩하십시오.',
         'fa' => 'پس از آن وارد سیستم شوید و تنظیمات خود را در onedrive متصل کنید',
     ],
-    'MakesuerWriteable' =>[
+    'MakesuerWriteable' => [
         'en-us' => 'Plase make sure the config.php is writeable. run writeable.sh.',
         'zh-cn' => '确认config.php可写。',
         'ja' => 'config.phpが書き込み可能であることを確認してください。',
         'ko-kr' => 'config.php가 쓰기 가능한지 확인하십시오.',
         'fa' => 'اطمینان حاصل کنید که config.php قابل نوشتن است. writeable.sh را اجرا کنید.',
     ],
-    'MakesuerRewriteOn' =>[
+    'MakesuerRewriteOn' => [
         'en-us' => 'Plase make sure the RewriteEngine is On.',
         'zh-cn' => '确认重写（伪静态）功能启用。',
         'ja' => '書き換え（擬似静的）機能が有効になっていることを確認します。',
         'ko-kr' => '다시 쓰기 (의사 정적) 기능이 활성화되어 있는지 확인하십시오.',
         'fa' => 'لطفاً مطمئن شوید که RewriteEngine روشن است.',
     ],
-    
+    'CopyUrl' => [
+        'en-us' => 'Copy URL',
+        'zh-cn' => '复制链接',
+    ],
+    'Success' => [
+        'en-us' => 'Success',
+        'zh-cn' => '成功',
+    ],
+    'SetAdminPassword' => [
+        'en-us' => 'Set Admin Password',
+        'zh-cn' => '设置管理密码',
+    ],
     'Refresh' => [
         'en-us' => 'Refresh',
         'zh-cn' => '刷新',
@@ -702,5 +787,21 @@ $constStr = [
         'ja' => 'キャッシュを再構築',
         'ko-kr' => '캐시 플러시',
         'fa' => 'رفرش cache',
+    ],
+    'CannotOneKeyUpate' => [
+        'en-us' => 'Can not update by a click! run update.sh',
+        'zh-cn' => '不能一键更新，可以运行update.sh',
+    ],
+    'QueryBranchs' => [
+        'en-us' => 'Query Branchs',
+        'zh-cn' => '查询分支',
+    ],
+    'ONEMANAGER_CONFIG_SAVE_ENV' => [
+        'en-us' => 'Config save in Environments',
+        'zh-cn' => '配置保存在环境变量',
+    ],
+    'ONEMANAGER_CONFIG_SAVE_FILE' => [
+        'en-us' => 'Config save in code file, may cause fee',
+        'zh-cn' => '配置保存在代码文件中，可能产生费用',
     ],
 ];
